@@ -1,34 +1,30 @@
-//===== Hercules Documentation ===============================
-//= Global configuration reference
-//===== By: ==================================================
-//= Panikon (Hercules Dev. Team)
-//===== Current Version: =====================================
-//= 20140616
-//===== Description: =========================================
-//= Global configurations found in conf/global/
-//============================================================
+# Global configuration reference
+> Global configurations found in conf/global/
+>
+> By: Panikon (Hercules Dev. Team)
 
-- What are global configurations?
+## What are global configurations?
 
 Global configurations are configurations that can be shared between servers,
 but can also be set independently in each server.
 
-- How do they work?
+## How do they work?
 
 They work by using an include system that is available with libconfig:
 
-  "A configuration file may "include" the contents of another file using an
-  include directive. This directive has the effect of inlining the contents of
-  the named file at the point of inclusion.
-
-  An include directive must appear on its own line in the input. It has the
-  form:
-
-  @include "filename"
-
-  Any backslashes or double quotes in the filename must be escaped as '\\' and
-  '\"', respectively."
-                                                From libconfig's documentation
+> A configuration file may "include" the contents of another file using an
+> include directive. This directive has the effect of inlining the contents of
+> the named file at the point of inclusion.
+>
+> An include directive must appear on its own line in the input. It has the
+> form:
+>
+> @include "filename"
+>
+> Any backslashes or double quotes in the filename must be escaped as \'\\\\\' and
+> \'\\\"\', respectively.
+>
+> \- From libconfig's documentation
 
 So each file that is included is actually inside each one of the main
 configuration files and thus a change in the first will be a change in the
@@ -36,16 +32,20 @@ latter.
 Note: the @include directive is read by the server executable, so any path
 should be from were it is and NOT from where the main configuration file is!
 
-- How do I stop using global configurations?
+## How do I stop using global configurations?
 
 To stop using global configurations is very simple, all you have to do is copy
 the contents that are inside the global configuration file and put them
 _exactly_ where the include directive were in the main configuration file.
 
 E.g.
-  Find in any file:
-      @include "conf/global/sql_connection.conf"
-  Replace it with:
+
+Find in any file:
+
+    @include "conf/global/sql_connection.conf"
+
+Replace it with:
+
     sql_connection: {
         // [INTER] You can specify the codepage to use in your mySQL tables here.
         // (Note that this feature requires MySQL 4.1+)
@@ -65,5 +65,6 @@ E.g.
         db_database: "ragnarok"
         //codepage:""
     }
-  If the main configuration file belongs to the map server, for instance, you
-  don't need to include default_codepage and case_sensitive.
+
+If the main configuration file belongs to the map server, for instance, you
+don't need to include default_codepage and case_sensitive.
